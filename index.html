@@ -12,10 +12,14 @@
     background: radial-gradient(ellipse at center, #cfc8b8 0%, #b8b0a0 100%);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
-    padding: 30px 20px;
+    padding: 40px 16px;
+  }
+
+  @media (min-height: 700px) {
+    body { align-items: center; }
   }
 
   /* ── SCENE ── */
@@ -23,6 +27,7 @@
     width: 460px;
     max-width: 100%;
     perspective: 1800px;
+    margin: 0 auto;
   }
 
   /* ── ENVELOPE ── */
@@ -178,7 +183,7 @@
     font-size: 9px;
     font-weight: 400;
     letter-spacing: 4px;
-    color: #b5c9a8;
+    color: #8aaa80;
     text-transform: uppercase;
     margin-bottom: 28px;
   }
@@ -231,7 +236,7 @@
     font-size: 9px;
     font-weight: 300;
     letter-spacing: 3.5px;
-    color: #a09080;
+    color: #877060;
     text-transform: uppercase;
     margin-bottom: 32px;
   }
@@ -361,15 +366,15 @@
   }
 
   .info-item-label {
-    font-size: 8px; letter-spacing: 2.5px; color: #b5c9a8;
+    font-size: 8px; letter-spacing: 2.5px; color: #7a9e7e;
     text-transform: uppercase; margin-bottom: 6px;
   }
   .info-item-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; color: #3a5438; font-weight: 400; line-height: 1.3;
+    font-size: 16px; color: #2e4230; font-weight: 400; line-height: 1.3;
   }
   .info-item-sub {
-    font-size: 9px; color: #a09080; font-weight: 300; margin-top: 3px; letter-spacing: 0.5px;
+    font-size: 9px; color: #857060; font-weight: 300; margin-top: 3px; letter-spacing: 0.5px;
   }
 
   /* RSVP note */
@@ -411,7 +416,7 @@
   }
 
   .footer-note {
-    font-size: 9px; letter-spacing: 3px; color: #b0a090;
+    font-size: 9px; letter-spacing: 3px; color: #8a7a6a;
     text-transform: uppercase; padding-top: 20px;
     border-top: 1px solid #e2dbd0;
   }
@@ -424,17 +429,36 @@
   .bot-line { width: 60px; height: 1px; }
   .bot-line.left { background: linear-gradient(to right, transparent, #b5c9a8 70%); }
   .bot-line.right { background: linear-gradient(to left, transparent, #b5c9a8 70%); }
+
+  @media (max-width: 480px) {
+    .cover-inner { padding: 40px 20px 36px 28px; }
+    .inside-content { padding: 36px 20px 36px 28px; }
+    .names { font-size: 52px; }
+    .pre-label { color: #8a7a6a; }
+    .tagline { color: #2e4230; }
+    .tagline-sub { color: #7a6a58; }
+    .open-hint { color: #4a7a4e; }
+    .inside-title { color: #8a7a6a; }
+    .info-item-label { color: #7a9e7e; }
+    .info-item-value { color: #2e4230; }
+    .info-item-sub { color: #7a6a58; }
+    .footer-note { color: #8a7a6a; }
+    .events { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .info-item {
+      padding: 14px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 72px;
+    }
+  }
 </style>
 </head>
 <body>
-
-    </div>
-    <!-- Names fade in -->
-    <div id="ringNames" style="text-align:center; opacity:0; transform:translateY(12px); transition: opacity 0.7s 1.6s, transform 0.7s 1.6s;">
-      <div style="font-family:'Cormorant Garamond',serif; font-size:38px; font-style:italic; font-weight:300; color:#f5f0e8; letter-spacing:-1px; line-height:1;">Myriam <span style="color:#c8a96e; font-size:28px;">&</span> Ariel</div>
-      <div style="font-size:9px; letter-spacing:4px; color:#7a9e7e; text-transform:uppercase; margin-top:10px;">¡Nos casamos!</div>
-    </div>
-  </div>
 
 <div class="scene">
 
