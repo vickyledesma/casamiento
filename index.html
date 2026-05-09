@@ -431,6 +431,30 @@
   .bot-line.left { background: linear-gradient(to right, transparent, #b5c9a8 70%); }
   .bot-line.right { background: linear-gradient(to left, transparent, #b5c9a8 70%); }
 
+  .alias-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+  .alias-copy:hover { opacity: 0.7; }
+  .alias-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #3a5438;
+    text-decoration: underline;
+    text-decoration-color: #b5c9a8;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+  .alias-copy.copied .alias-text { color: #7a9e7e; text-decoration: none; }
+  .alias-icon { font-size: 11px; color: #b5c9a8; transition: color 0.2s; }
+  .alias-copy.copied .alias-icon { color: #7a9e7e; }
+
   @media (max-width: 480px) {
     .cover-inner { padding: 40px 20px 36px 28px; }
     .inside-content { padding: 36px 20px 36px 28px; }
@@ -567,10 +591,13 @@
             <div class="info-item-value">Cena completa</div>
             <div class="info-item-sub">Avisarnos restricciones</div>
           </div>
-          <div class="info-item" style="border-left-color: #c8a96e;">
+          <div class="info-item" style="border-left-color: #7a9e7e;">
             <div class="info-item-label">Regalo</div>
-            <div class="info-item-value">myriambuena</div>
-            <div class="info-item-sub">Tu presencia es el mejor regalo</div>
+            <div class="info-item-value" style="font-size:13px;">Si deseás hacernos un regalo, podés hacerlo a través del alias</div>
+            <div class="alias-copy" onclick="copyAlias(this)" title="Tocar para copiar">
+              <span class="alias-text">myriambuena</span>
+              <span class="alias-icon">⎘</span>
+            </div>
           </div>
         </div>
 
@@ -713,6 +740,17 @@
     setTimeout(() => {
       launchConfetti();
     }, 1100);
+  }
+
+  function copyAlias(el) {
+    navigator.clipboard.writeText('myriambuena').then(() => {
+      el.classList.add('copied');
+      el.querySelector('.alias-text').textContent = '¡Copiado!';
+      setTimeout(() => {
+        el.classList.remove('copied');
+        el.querySelector('.alias-text').textContent = 'myriambuena';
+      }, 2000);
+    });
   }
 
   function toggleInside(e) {
