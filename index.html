@@ -440,7 +440,7 @@
 
   /* RSVP note */
   .rsvp-box {
-    background: linear-gradient(135deg, #c8a96e 0%, #a07840 100%);
+    background: linear-gradient(135deg, #1e3050 0%, #152540 100%);
     padding: 20px 22px;
     text-align: center;
     margin-bottom: 22px;
@@ -610,9 +610,10 @@
       <div class="carousel-wrap" id="carouselWrap">
         <div class="carousel-track" id="carouselTrack">
           <img src="IMG_5462-EDIT.jpg" alt="Foto 1">
-          <img src="IMG_5464-EDIT.jpg" alt="Foto 2">
-          <img src="IMG_1086-EDIT-EDIT.jpg" alt="Foto 3">
-          <img src="IMG-20240210-WA0014-EDIT.jpg" alt="Foto 4">
+          <img src="IMG-20240210-WA0014-EDIT.jpg" alt="Foto 2">
+          <img src="foto5.jpg" alt="Foto 3">
+          <img src="foto6.jpg" alt="Foto 4">
+          <img src="foto7.jpg" alt="Foto 5">
         </div>
           <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#8249;</button>
         <button class="carousel-btn next" onclick="moveCarousel(1)">&#8250;</button>
@@ -621,6 +622,7 @@
           <div class="carousel-dot" onclick="goToSlide(1)"></div>
           <div class="carousel-dot" onclick="goToSlide(2)"></div>
           <div class="carousel-dot" onclick="goToSlide(3)"></div>
+          <div class="carousel-dot" onclick="goToSlide(4)"></div>
         </div>
       </div>
 
@@ -673,15 +675,6 @@
             <div class="info-item-label">Menú</div>
             <div class="info-item-value">Cena completa</div>
             <div class="info-item-sub">Avisarnos restricciones</div>
-          </div>
-          <div class="info-item">
-            <div class="info-item-label">Regalo</div>
-            <div class="info-item-value" style="font-size:13px;">Si deseás hacernos un regalo, podés hacerlo a través del alias</div>
-            <div class="alias-copy" onclick="copyAlias(this)" title="Tocar para copiar">
-              <span class="alias-text">myriambuena</span>
-              <span class="alias-icon">⎘</span>
-            </div>
-            <div style="font-size:10px; color:#6a85a8; opacity:0.7; margin-top:6px; font-style:italic;">Lo importante es tu presencia</div>
           </div>
         </div>
 
@@ -833,7 +826,7 @@
 
   // ── CARRUSEL ──
   let currentSlide = 0;
-  const totalSlides = 4;
+  const totalSlides = 5;
 
   function moveCarousel(dir) {
     currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
