@@ -262,7 +262,7 @@
   }
   .open-hint:hover {
     background: #c8a96e;
-    color: #1a2535;
+    color: #1e3050;
     border-color: #c8a96e;
     box-shadow: 0 4px 16px rgba(200,169,110,0.3);
     transform: translateY(-1px);
@@ -275,6 +275,65 @@
   .open-hint svg { transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
 
   .bottom-accent { height: 5px; background: linear-gradient(to right, #c8a96e, #a07840); }
+
+  /* ── CARRUSEL ── */
+  .carousel-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 3px;
+    background: #1e3050;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .carousel-track img {
+    width: 100%;
+    flex-shrink: 0;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(30,48,80,0.6);
+    border: none;
+    color: #f0e6d0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, opacity 0.3s;
+    z-index: 10;
+    opacity: 0;
+  }
+  .carousel-wrap:hover .carousel-btn { opacity: 1; }
+  .carousel-btn:hover { background: rgba(30,48,80,0.9); }
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
+  .carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(240,230,208,0.4);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .carousel-dot.active { background: #c8a96e; }
 
   /* ── INSIDE PANEL ── */
   .inside {
@@ -331,7 +390,7 @@
 
   .event-block { padding: 22px 14px 18px; text-align: center; }
   .event-block.civil { background: #1e3050; }
-  .event-block.fiesta { background: #152540; }
+  .event-block.fiesta { background: #1e3050; }
 
   .event-icon { margin-bottom: 10px; opacity: 0.75; }
 
@@ -400,8 +459,8 @@
     gap: 8px;
     margin-top: 14px;
     padding: 11px 22px;
-    background: #25D366;
-    color: #fff;
+    background: #1e3050;
+    color: #f0e6d0;
     text-decoration: none;
     font-size: 11px;
     font-weight: 500;
@@ -410,7 +469,7 @@
     transition: background 0.2s, transform 0.15s;
   }
   .whatsapp-btn:hover {
-    background: #1ebe5d;
+    background: #2a4570;
     transform: translateY(-1px);
   }
   .rsvp-contact {
@@ -461,7 +520,7 @@
     .inside-content { padding: 36px 20px 36px 28px; }
     .names { font-size: 52px; }
     .pre-label { color: #6a85a8; }
-    .tagline { color: #1e3050; }
+    .tagline { color: #f0e6d0; }
     .tagline-sub { color: #6a85a8; }
     .open-hint { color: #c8a96e; }
     .inside-title { color: #6a85a8; }
@@ -485,6 +544,11 @@
 </style>
 </head>
 <body>
+
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="Pappo - Juntos a la Par (Official Audio).mp3" type="audio/mpeg">
+</audio>
 
 <div class="scene">
 
@@ -541,6 +605,25 @@
     <!-- INSIDE PANEL -->
     <div class="inside" id="inside">
       <div class="inside-accent"></div>
+
+      <!-- CARRUSEL -->
+      <div class="carousel-wrap" id="carouselWrap">
+        <div class="carousel-track" id="carouselTrack">
+          <img src="IMG_5462-EDIT.jpg" alt="Foto 1">
+          <img src="IMG_5464-EDIT.jpg" alt="Foto 2">
+          <img src="IMG_1086-EDIT-EDIT.jpg" alt="Foto 3">
+          <img src="IMG-20240210-WA0014-EDIT.jpg" alt="Foto 4">
+        </div>
+          <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#8249;</button>
+        <button class="carousel-btn next" onclick="moveCarousel(1)">&#8250;</button>
+        <div class="carousel-dots">
+          <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(3)"></div>
+        </div>
+      </div>
+
       <div class="inside-content">
         <div class="inside-title">Los esperamos en estos momentos especiales</div>
 
@@ -591,13 +674,14 @@
             <div class="info-item-value">Cena completa</div>
             <div class="info-item-sub">Avisarnos restricciones</div>
           </div>
-          <div class="info-item" style="border-left-color: #7a9e7e;">
+          <div class="info-item">
             <div class="info-item-label">Regalo</div>
             <div class="info-item-value" style="font-size:13px;">Si deseás hacernos un regalo, podés hacerlo a través del alias</div>
             <div class="alias-copy" onclick="copyAlias(this)" title="Tocar para copiar">
               <span class="alias-text">myriambuena</span>
               <span class="alias-icon">⎘</span>
             </div>
+            <div style="font-size:10px; color:#6a85a8; opacity:0.7; margin-top:6px; font-style:italic;">Lo importante es tu presencia</div>
           </div>
         </div>
 
@@ -635,7 +719,7 @@
   let insideOpen = false;
 
   // ── CONFETTI ──
-  const COLORS = ['#1e3050','#2a4570','#c8a96e','#d4bf8a','#f0e6d0','#7a90b0','#a0b8d8','#e8f0f8'];
+  const COLORS = ['#1e3050','#1e3050','#c8a96e','#d4bf8a','#f0e6d0','#7a90b0','#a0b8d8','#e8f0f8'];
   const pieces = [];
   let canvas, ctx, animId;
 
@@ -740,6 +824,45 @@
     setTimeout(() => {
       launchConfetti();
     }, 1100);
+
+    // 5) Arrancar música
+    const music = document.getElementById('bgMusic');
+    music.volume = 0.5;
+    music.play().catch(() => {});
+  }
+
+  // ── CARRUSEL ──
+  let currentSlide = 0;
+  const totalSlides = 4;
+
+  function moveCarousel(dir) {
+    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+    updateCarousel();
+    resetCarouselInterval();
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+    resetCarouselInterval();
+  }
+
+  function updateCarousel() {
+    document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+    document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  // Auto-avance cada 7 segundos (solo si el carrusel existe)
+  let carouselInterval;
+  if (document.getElementById('carouselTrack')) {
+    carouselInterval = setInterval(() => moveCarousel(1), 7000);
+  }
+
+  function resetCarouselInterval() {
+    clearInterval(carouselInterval);
+    carouselInterval = setInterval(() => moveCarousel(1), 7000);
   }
 
   function copyAlias(el) {
