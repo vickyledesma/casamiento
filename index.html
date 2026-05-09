@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myriam & Ariel — Nos Casamos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: radial-gradient(ellipse at center, #cfc8b8 0%, #b8b0a0 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Jost', sans-serif;
+    padding: 30px 20px;
+  }
+
+  /* ── SCENE ── */
+  .scene {
+    width: 460px;
+    max-width: 100%;
+    perspective: 1800px;
+  }
+
+  /* ── ENVELOPE ── */
+  .envelope-wrap {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .envelope-wrap.hidden { opacity: 0; pointer-events: none; height: 0; overflow: hidden; }
+
+  .envelope {
+    background: #e8e2d6;
+    border-radius: 4px;
+    padding: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* V flap top */
+  .envelope::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 155px;
+    background: #ddd6c8;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 2;
+    transition: transform 0.6s ease, opacity 0.4s;
+    transform-origin: top center;
+  }
+  .envelope-wrap.opening .envelope::before {
+    transform: rotateX(-180deg);
+    opacity: 0;
+  }
+
+  /* Envelope side triangles */
+  .envelope::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 155px;
+    background: #d8d0c2;
+    clip-path: polygon(0 100%, 100% 100%, 50% 0);
+    z-index: 1;
+  }
+
+  .env-left, .env-right {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 50%;
+    z-index: 1;
+  }
+  .env-left {
+    left: 0;
+    background: #ddd6c8;
+    clip-path: polygon(0 0, 0 100%, 100% 50%);
+  }
+  .env-right {
+    right: 0;
+    background: #d5cdc0;
+    clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  }
+
+  .envelope-center {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+
+  .env-seal {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7a9e7e, #4a6741);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    box-shadow: 0 4px 16px rgba(74,103,65,0.4);
+  }
+
+  .env-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: #7a6a56;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .env-hint {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #b0a090;
+    text-transform: uppercase;
+  }
+
+  /* ── CARD WRAPPER ── */
+  .card-wrap {
+    width: 100%;
+    position: relative;
+    margin-top: -20px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;
+  }
+  .card-wrap.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+    margin-top: 0;
+  }
+
+  /* ── BOOK CARD ── */
+  .book {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  /* Cover — front face */
+  .cover {
+    background: #faf7f2;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+  }
+  .cover:hover { box-shadow: 0 24px 70px rgba(0,0,0,0.22); }
+
+  .accent-left {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, #7a9e7e, #c8a96e);
+  }
+
+  .cover-inner {
+    padding: 52px 52px 48px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .pre-label {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: #b5c9a8;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    font-style: italic;
+    color: #3a5438;
+    line-height: 0.95;
+    letter-spacing: -1.5px;
+  }
+
+  .ampersand-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 14px 0;
+  }
+  .amp-line { flex: 1; height: 1px; max-width: 80px; }
+  .amp-line.left { background: linear-gradient(to right, transparent, #c8b89a); }
+  .amp-line.right { background: linear-gradient(to left, transparent, #c8b89a); }
+
+  .ampersand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 300;
+    color: #c8a96e;
+  }
+
+  .sep-line {
+    width: 40px; height: 1px;
+    background: #b5c9a8;
+    margin: 30px auto 18px;
+  }
+
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: #3a5438;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .tagline-sub {
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 3.5px;
+    color: #a09080;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .open-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #7a9e7e;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    border: 1.5px solid #b5c9a8;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    margin-bottom: 8px;
+    background: transparent;
+    user-select: none;
+  }
+  .open-hint:hover {
+    background: #7a9e7e;
+    color: #fff;
+    border-color: #7a9e7e;
+    box-shadow: 0 4px 16px rgba(122,158,126,0.3);
+    transform: translateY(-1px);
+  }
+  .open-hint.active {
+    background: #f3ede4;
+    color: #4a6741;
+    border-color: #c8b89a;
+  }
+  .open-hint svg { transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+  .bottom-accent { height: 5px; background: linear-gradient(to right, #7a9e7e, #c8a96e); }
+
+  /* ── INSIDE PANEL ── */
+  .inside {
+    background: #faf7f2;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    margin-top: 3px;
+    height: 0;
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.97);
+    transform-origin: top center;
+    transition: height 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s ease;
+    position: relative;
+    pointer-events: none;
+  }
+  .inside.open {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    box-shadow: 0 28px 70px rgba(0,0,0,0.18);
+    pointer-events: all;
+  }
+
+  .inside-accent {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, #c8a96e, #7a9e7e);
+  }
+
+  .inside-content {
+    padding: 44px 52px 44px 60px;
+    text-align: center;
+  }
+
+  .inside-title {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #b5c9a8;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  /* Events grid */
+  .events {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .event-block { padding: 22px 14px 18px; text-align: center; }
+  .event-block.civil { background: #7a9e7e; }
+  .event-block.fiesta { background: #3a5438; }
+
+  .event-icon { margin-bottom: 10px; opacity: 0.75; }
+
+  .event-label {
+    font-size: 8px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 8px;
+  }
+  .event-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 400; color: #fff; line-height: 1.2; margin-bottom: 5px;
+  }
+  .event-time { font-size: 11px; font-weight: 300; letter-spacing: 1.5px; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+  .event-place { font-size: 9px; font-weight: 300; letter-spacing: 2px; color: rgba(255,255,255,0.55); text-transform: uppercase; }
+
+  /* Extra info */
+  .info-divider {
+    display: flex; align-items: center; gap: 12px; margin: 24px 0 20px;
+  }
+  .info-divider-line { flex: 1; height: 1px; background: #e0d8cc; }
+  .info-divider-text { font-size: 8px; letter-spacing: 3px; color: #c8b89a; text-transform: uppercase; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .info-item {
+    padding: 16px 12px;
+    background: #f3ede4;
+    border-left: 3px solid #b5c9a8;
+    text-align: left;
+  }
+
+  .info-item-label {
+    font-size: 8px; letter-spacing: 2.5px; color: #b5c9a8;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .info-item-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #3a5438; font-weight: 400; line-height: 1.3;
+  }
+  .info-item-sub {
+    font-size: 9px; color: #a09080; font-weight: 300; margin-top: 3px; letter-spacing: 0.5px;
+  }
+
+  /* RSVP note */
+  .rsvp-box {
+    background: linear-gradient(135deg, #7a9e7e 0%, #4a6741 100%);
+    padding: 20px 22px;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .rsvp-label {
+    font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); margin-bottom: 8px;
+  }
+  .rsvp-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: #fff; font-style: italic; line-height: 1.4;
+  }
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 11px 22px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    border-radius: 24px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .whatsapp-btn:hover {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+  }
+  .rsvp-contact {
+    font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 1px; margin-top: 6px;
+  }
+
+  .footer-note {
+    font-size: 9px; letter-spacing: 3px; color: #b0a090;
+    text-transform: uppercase; padding-top: 20px;
+    border-top: 1px solid #e2dbd0;
+  }
+
+  .inside .bottom-accent { height: 5px; background: linear-gradient(to right, #c8a96e, #7a9e7e); }
+
+  .botanical {
+    display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto 28px;
+  }
+  .bot-line { width: 60px; height: 1px; }
+  .bot-line.left { background: linear-gradient(to right, transparent, #b5c9a8 70%); }
+  .bot-line.right { background: linear-gradient(to left, transparent, #b5c9a8 70%); }
+</style>
+</head>
+<body>
+
+    </div>
+    <!-- Names fade in -->
+    <div id="ringNames" style="text-align:center; opacity:0; transform:translateY(12px); transition: opacity 0.7s 1.6s, transform 0.7s 1.6s;">
+      <div style="font-family:'Cormorant Garamond',serif; font-size:38px; font-style:italic; font-weight:300; color:#f5f0e8; letter-spacing:-1px; line-height:1;">Myriam <span style="color:#c8a96e; font-size:28px;">&</span> Ariel</div>
+      <div style="font-size:9px; letter-spacing:4px; color:#7a9e7e; text-transform:uppercase; margin-top:10px;">¡Nos casamos!</div>
+    </div>
+  </div>
+
+<div class="scene">
+
+  <!-- ENVELOPE -->
+  <div class="envelope-wrap" id="envelope" onclick="openEnvelope()">
+    <div class="envelope">
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="envelope-center">
+        <div class="env-seal">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 3 Q17 8 14 14 Q11 8 14 3Z" fill="rgba(255,255,255,0.8)"/>
+            <path d="M14 25 Q17 20 14 14 Q11 20 14 25Z" fill="rgba(255,255,255,0.8)"/>
+            <path d="M3 14 Q8 11 14 14 Q8 17 3 14Z" fill="rgba(255,255,255,0.6)"/>
+            <path d="M25 14 Q20 11 14 14 Q20 17 25 14Z" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="14" cy="14" r="3" fill="rgba(255,255,255,0.95)"/>
+          </svg>
+        </div>
+        <div class="env-text">Myriam & Ariel</div>
+        <div class="env-hint">Tocar para abrir ✦</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="card-wrap" id="cardWrap">
+
+    <!-- COVER (front) -->
+    <div class="cover" id="cover">
+      <div class="accent-left"></div>
+      <div class="cover-inner">
+        <div class="pre-label">Con alegría los invitamos a celebrar</div>
+        <div class="names">Myriam</div>
+        <div class="ampersand-wrap">
+          <div class="amp-line left"></div>
+          <div class="ampersand">&</div>
+          <div class="amp-line right"></div>
+        </div>
+        <div class="names">Ariel</div>
+        <div class="sep-line"></div>
+        <div class="tagline">¡Nos casamos!</div>
+        <div class="tagline-sub">y queremos compartirlo con ustedes</div>
+        <div style="height:24px"></div>
+        <div class="open-hint" onclick="toggleInside(event)">
+          <span>Ver detalles</span>
+          <svg id="arrowIcon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 4 L6 8 L10 4" stroke="#b5c9a8" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="bottom-accent"></div>
+    </div>
+
+    <!-- INSIDE PANEL -->
+    <div class="inside" id="inside">
+      <div class="inside-accent"></div>
+      <div class="inside-content">
+        <div class="inside-title">Los esperamos en estos momentos especiales</div>
+
+        <div class="events">
+          <div class="event-block civil">
+            <svg class="event-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="7" width="16" height="11" rx="1" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/>
+              <path d="M6 7V5a4 4 0 018 0v2" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/>
+              <path d="M7 12.5 L9 14.5 L13 10.5" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="event-label">Nuestro Civil</div>
+            <div class="event-date">25 de Junio</div>
+            <div class="event-time">11:30 hs</div>
+            <div class="event-place">Quintana 438</div>
+          </div>
+          <div class="event-block fiesta">
+            <svg class="event-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2 L10 5.5M6.5 3.5 L8.2 6.2M13.5 3.5 L11.8 6.2" stroke="rgba(255,255,255,0.65)" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M4.5 10 C4.5 14.1 7 17.5 10 17.5 C13 17.5 15.5 14.1 15.5 10 Z" stroke="rgba(255,255,255,0.65)" stroke-width="1.2" fill="rgba(255,255,255,0.1)"/>
+              <path d="M4.5 10 L15.5 10" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/>
+            </svg>
+            <div class="event-label">Nuestra Fiesta</div>
+            <div class="event-date">26 de Junio</div>
+            <div class="event-time">20:00 hs</div>
+            <div class="event-place">Beltrán 303</div>
+          </div>
+        </div>
+
+        <!-- Extra info -->
+        <div class="info-divider">
+          <div class="info-divider-line"></div>
+          <div class="info-divider-text">Más info</div>
+          <div class="info-divider-line"></div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-item-label">Bebidas</div>
+            <div class="info-item-value">Traer su bebida</div>
+            <div class="info-item-sub">Gaseosas y hielo en el lugar</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-label">Estacionamiento</div>
+            <div class="info-item-value">Libre en la zona</div>
+            <div class="info-item-sub">A metros del salón</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-label">Menú</div>
+            <div class="info-item-value">Cena completa</div>
+            <div class="info-item-sub">Avisarnos restricciones</div>
+          </div>
+          <div class="info-item" style="border-left-color: #c8a96e;">
+            <div class="info-item-label">Regalo</div>
+            <div class="info-item-value">creando.victoria</div>
+            <div class="info-item-sub">Alias · Tu presencia es nuestro mejor regalo 🌿</div>
+          </div>
+        </div>
+
+        <div class="rsvp-box">
+          <div class="rsvp-label">Confirmación de asistencia</div>
+          <div class="rsvp-text">Por favor confirmá antes del 10 de Junio</div>
+          <a class="whatsapp-btn" href="https://wa.me/542494511655?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20al%20casamiento%20de%20Myriam%20y%20Ariel%20%F0%9F%8C%BF" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Confirmar asistencia
+          </a>
+        </div>
+
+        <div class="botanical">
+          <div class="bot-line left"></div>
+          <svg width="46" height="22" viewBox="0 0 46 22" fill="none">
+            <path d="M23 11 Q19 4 13 2 Q17 7 23 11Z" fill="#b5c9a8"/>
+            <path d="M23 11 Q27 4 33 2 Q29 7 23 11Z" fill="#b5c9a8"/>
+            <path d="M23 11 Q15 11 9 7 Q15 10 23 11Z" fill="#7a9e7e" opacity="0.7"/>
+            <path d="M23 11 Q31 11 37 7 Q31 10 23 11Z" fill="#7a9e7e" opacity="0.7"/>
+            <path d="M23 11 Q19 18 13 20 Q17 15 23 11Z" fill="#b5c9a8" opacity="0.55"/>
+            <path d="M23 11 Q27 18 33 20 Q29 15 23 11Z" fill="#b5c9a8" opacity="0.55"/>
+            <circle cx="23" cy="11" r="2.5" fill="#c8a96e"/>
+          </svg>
+          <div class="bot-line right"></div>
+        </div>
+
+        <div class="footer-note">Traer bebida y ganas de bailar</div>
+      </div>
+      <div class="bottom-accent"></div>
+    </div>
+
+  </div><!-- /card-wrap -->
+</div><!-- /scene -->
+
+<script>
+  let envelopeOpened = false;
+  let insideOpen = false;
+
+  // ── CONFETTI ──
+  const COLORS = ['#c8a96e','#e8d9a0','#f5f0e8','#7a9e7e','#b5c9a8','#d4af6a','#fff8e7'];
+  const pieces = [];
+  let canvas, ctx, animId;
+
+  function launchConfetti() {
+    canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200;';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+    ctx = canvas.getContext('2d');
+
+    for (let i = 0; i < 140; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * 200,
+        r: 3 + Math.random() * 5,
+        d: 2.5 + Math.random() * 3,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        tilt: Math.random() * 12 - 6,
+        tiltSpeed: 0.08 + Math.random() * 0.12,
+        tiltAngle: Math.random() * Math.PI * 2,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle',
+        spin: (Math.random() - 0.5) * 0.15,
+        angle: 0,
+        drift: (Math.random() - 0.5) * 0.8,
+        opacity: 0.85 + Math.random() * 0.15,
+      });
+    }
+    drawConfetti();
+    setTimeout(stopConfetti, 5500);
+  }
+
+  function drawConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cardEl = document.getElementById('cardWrap');
+    const cardBottom = cardEl ? cardEl.getBoundingClientRect().bottom : canvas.height;
+
+    pieces.forEach(p => {
+      // Only start fading once piece passes the bottom of the card
+      if (p.y > cardBottom) {
+        p.opacity -= 0.045;
+      }
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.opacity);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'rect') {
+        ctx.fillRect(-p.r, -p.r * 0.4, p.r * 2, p.r * 0.8);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.r * 0.7, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+      p.y += p.d;
+      p.x += p.drift;
+      p.angle += p.spin;
+    });
+    for (let i = pieces.length - 1; i >= 0; i--) {
+      if (pieces[i].opacity <= 0) pieces.splice(i, 1);
+    }
+    if (pieces.length > 0) animId = requestAnimationFrame(drawConfetti);
+    else stopConfetti();
+  }
+
+  function stopConfetti() {
+    cancelAnimationFrame(animId);
+    // fade out canvas
+    let op = 1;
+    const fade = setInterval(() => {
+      op -= 0.05;
+      if (canvas) canvas.style.opacity = op;
+      if (op <= 0) { clearInterval(fade); if (canvas) canvas.remove(); }
+    }, 30);
+  }
+
+  function openEnvelope() {
+    if (envelopeOpened) return;
+    envelopeOpened = true;
+    const env = document.getElementById('envelope');
+    env.classList.add('opening');
+    setTimeout(() => {
+      env.classList.add('hidden');
+      launchConfetti();
+      const card = document.getElementById('cardWrap');
+      card.classList.add('visible');
+    }, 650);
+  }
+
+  function toggleInside(e) {
+    e.stopPropagation();
+    insideOpen = !insideOpen;
+    const inside = document.getElementById('inside');
+    const hint = e.currentTarget;
+    const arrow = document.getElementById('arrowIcon');
+
+    if (insideOpen) {
+      // Expand: set height to scrollHeight, then after transition set to auto
+      inside.style.height = inside.scrollHeight + 'px';
+      inside.classList.add('open');
+      hint.classList.add('active');
+      arrow.style.transform = 'rotate(180deg)';
+      inside.addEventListener('transitionend', function onEnd(ev) {
+        if (ev.propertyName === 'height') {
+          inside.style.height = 'auto';
+          inside.removeEventListener('transitionend', onEnd);
+        }
+      });
+    } else {
+      // Collapse: lock height first, then animate to 0
+      inside.style.height = inside.scrollHeight + 'px';
+      inside.offsetHeight; // force reflow
+      requestAnimationFrame(() => {
+        inside.style.height = '0px';
+        inside.classList.remove('open');
+        hint.classList.remove('active');
+        arrow.style.transform = 'rotate(0deg)';
+      });
+    }
+  }
+</script>
+</body>
+</html>
