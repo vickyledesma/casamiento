@@ -9,7 +9,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: radial-gradient(ellipse at center, #cfc8b8 0%, #b8b0a0 100%);
+    background: radial-gradient(ellipse at center, #e8ecf2 0%, #d0d8e4 100%);
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -40,10 +40,10 @@
   .envelope-wrap.hidden { opacity: 0; pointer-events: none; height: 0; overflow: hidden; transition: opacity 0.5s, height 0s 0.5s; }
 
   .envelope {
-    background: #e8e2d6;
+    background: #f5f8fc;
     border-radius: 4px;
     padding: 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     overflow: hidden;
     position: relative;
     height: 300px;
@@ -58,7 +58,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 155px;
-    background: #ddd6c8;
+    background: #dce5f0;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     z-index: 2;
     transition: transform 0.6s ease, opacity 0.4s;
@@ -75,7 +75,7 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 155px;
-    background: #d8d0c2;
+    background: #cdd8e8;
     clip-path: polygon(0 100%, 100% 100%, 50% 0);
     z-index: 1;
   }
@@ -88,12 +88,12 @@
   }
   .env-left {
     left: 0;
-    background: #ddd6c8;
+    background: #d8e2f0;
     clip-path: polygon(0 0, 0 100%, 100% 50%);
   }
   .env-right {
     right: 0;
-    background: #d5cdc0;
+    background: #cfd9ea;
     clip-path: polygon(100% 0, 100% 100%, 0 50%);
   }
 
@@ -107,26 +107,26 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #7a9e7e, #4a6741);
+    background: linear-gradient(135deg, #c8a96e, #a07840);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 14px;
-    box-shadow: 0 4px 16px rgba(74,103,65,0.4);
+    box-shadow: 0 4px 16px rgba(200,169,110,0.4);
   }
 
   .env-text {
     font-family: 'Cormorant Garamond', serif;
     font-size: 15px;
     font-style: italic;
-    color: #7a6a56;
+    color: #1e3050;
     letter-spacing: 1px;
     margin-bottom: 4px;
   }
   .env-hint {
     font-size: 9px;
     letter-spacing: 3px;
-    color: #b0a090;
+    color: #6a85a8;
     text-transform: uppercase;
   }
 
@@ -157,21 +157,21 @@
 
   /* Cover — front face */
   .cover {
-    background: #faf7f2;
+    background: #1e3050;
     border-radius: 2px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     position: relative;
     cursor: pointer;
     transition: box-shadow 0.3s;
   }
-  .cover:hover { box-shadow: 0 24px 70px rgba(0,0,0,0.22); }
+  .cover:hover { box-shadow: 0 24px 70px rgba(0,0,0,0.5); }
 
   .accent-left {
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, #7a9e7e, #c8a96e);
+    background: linear-gradient(to bottom, #c8a96e, #a07840);
   }
 
   .cover-inner {
@@ -184,7 +184,7 @@
     font-size: 9px;
     font-weight: 400;
     letter-spacing: 4px;
-    color: #8aaa80;
+    color: #7a90b0;
     text-transform: uppercase;
     margin-bottom: 28px;
   }
@@ -194,7 +194,7 @@
     font-size: 64px;
     font-weight: 300;
     font-style: italic;
-    color: #3a5438;
+    color: #f0e6d0;
     line-height: 0.95;
     letter-spacing: -1.5px;
   }
@@ -207,8 +207,8 @@
     margin: 14px 0;
   }
   .amp-line { flex: 1; height: 1px; max-width: 80px; }
-  .amp-line.left { background: linear-gradient(to right, transparent, #c8b89a); }
-  .amp-line.right { background: linear-gradient(to left, transparent, #c8b89a); }
+  .amp-line.left { background: linear-gradient(to right, transparent, #c8a96e); }
+  .amp-line.right { background: linear-gradient(to left, transparent, #c8a96e); }
 
   .ampersand {
     font-family: 'Cormorant Garamond', serif;
@@ -220,15 +220,16 @@
 
   .sep-line {
     width: 40px; height: 1px;
-    background: #b5c9a8;
+    background: #c8a96e;
     margin: 30px auto 18px;
+    opacity: 0.5;
   }
 
   .tagline {
     font-family: 'Cormorant Garamond', serif;
     font-size: 42px;
     font-weight: 400;
-    color: #3a5438;
+    color: #f0e6d0;
     line-height: 1;
     margin-bottom: 10px;
   }
@@ -237,7 +238,7 @@
     font-size: 9px;
     font-weight: 300;
     letter-spacing: 3.5px;
-    color: #877060;
+    color: #7a90b0;
     text-transform: uppercase;
     margin-bottom: 32px;
   }
@@ -248,10 +249,10 @@
     gap: 8px;
     font-size: 9px;
     letter-spacing: 3px;
-    color: #7a9e7e;
+    color: #c8a96e;
     text-transform: uppercase;
     padding: 11px 22px;
-    border: 1.5px solid #b5c9a8;
+    border: 1.5px solid #c8a96e;
     border-radius: 24px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
@@ -260,24 +261,24 @@
     user-select: none;
   }
   .open-hint:hover {
-    background: #7a9e7e;
-    color: #fff;
-    border-color: #7a9e7e;
-    box-shadow: 0 4px 16px rgba(122,158,126,0.3);
+    background: #c8a96e;
+    color: #1a2535;
+    border-color: #c8a96e;
+    box-shadow: 0 4px 16px rgba(200,169,110,0.3);
     transform: translateY(-1px);
   }
   .open-hint.active {
-    background: #f3ede4;
-    color: #4a6741;
-    border-color: #c8b89a;
+    background: rgba(200,169,110,0.15);
+    color: #c8a96e;
+    border-color: #c8a96e;
   }
   .open-hint svg { transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
 
-  .bottom-accent { height: 5px; background: linear-gradient(to right, #7a9e7e, #c8a96e); }
+  .bottom-accent { height: 5px; background: linear-gradient(to right, #c8a96e, #a07840); }
 
   /* ── INSIDE PANEL ── */
   .inside {
-    background: #faf7f2;
+    background: #f5f8fc;
     border-radius: 2px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
@@ -304,7 +305,7 @@
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, #c8a96e, #7a9e7e);
+    background: linear-gradient(to bottom, #c8a96e, #a07840);
   }
 
   .inside-content {
@@ -315,7 +316,7 @@
   .inside-title {
     font-size: 9px;
     letter-spacing: 4px;
-    color: #b5c9a8;
+    color: #6a85a8;
     text-transform: uppercase;
     margin-bottom: 28px;
   }
@@ -329,8 +330,8 @@
   }
 
   .event-block { padding: 22px 14px 18px; text-align: center; }
-  .event-block.civil { background: #7a9e7e; }
-  .event-block.fiesta { background: #3a5438; }
+  .event-block.civil { background: #1e3050; }
+  .event-block.fiesta { background: #152540; }
 
   .event-icon { margin-bottom: 10px; opacity: 0.75; }
 
@@ -349,8 +350,8 @@
   .info-divider {
     display: flex; align-items: center; gap: 12px; margin: 24px 0 20px;
   }
-  .info-divider-line { flex: 1; height: 1px; background: #e0d8cc; }
-  .info-divider-text { font-size: 8px; letter-spacing: 3px; color: #c8b89a; text-transform: uppercase; }
+  .info-divider-line { flex: 1; height: 1px; background: #cdd8e8; }
+  .info-divider-text { font-size: 8px; letter-spacing: 3px; color: #c8a96e; text-transform: uppercase; }
 
   .info-grid {
     display: grid;
@@ -361,26 +362,26 @@
 
   .info-item {
     padding: 16px 12px;
-    background: #f3ede4;
-    border-left: 3px solid #b5c9a8;
+    background: #eaf0f8;
+    border-left: 3px solid #1e3050;
     text-align: left;
   }
 
   .info-item-label {
-    font-size: 8px; letter-spacing: 2.5px; color: #7a9e7e;
+    font-size: 8px; letter-spacing: 2.5px; color: #6a85a8;
     text-transform: uppercase; margin-bottom: 6px;
   }
   .info-item-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; color: #2e4230; font-weight: 400; line-height: 1.3;
+    font-size: 18px; color: #1e3050; font-weight: 600; line-height: 1.3;
   }
   .info-item-sub {
-    font-size: 9px; color: #857060; font-weight: 300; margin-top: 3px; letter-spacing: 0.5px;
+    font-size: 9px; color: #6a85a8; font-weight: 300; margin-top: 3px; letter-spacing: 0.5px;
   }
 
   /* RSVP note */
   .rsvp-box {
-    background: linear-gradient(135deg, #7a9e7e 0%, #4a6741 100%);
+    background: linear-gradient(135deg, #c8a96e 0%, #a07840 100%);
     padding: 20px 22px;
     text-align: center;
     margin-bottom: 22px;
@@ -417,19 +418,19 @@
   }
 
   .footer-note {
-    font-size: 9px; letter-spacing: 3px; color: #8a7a6a;
+    font-size: 9px; letter-spacing: 3px; color: #6a85a8;
     text-transform: uppercase; padding-top: 20px;
-    border-top: 1px solid #e2dbd0;
+    border-top: 1px solid #cdd8e8;
   }
 
-  .inside .bottom-accent { height: 5px; background: linear-gradient(to right, #c8a96e, #7a9e7e); }
+  .inside .bottom-accent { height: 5px; background: linear-gradient(to right, #c8a96e, #a07840); }
 
   .botanical {
     display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto 28px;
   }
   .bot-line { width: 60px; height: 1px; }
-  .bot-line.left { background: linear-gradient(to right, transparent, #b5c9a8 70%); }
-  .bot-line.right { background: linear-gradient(to left, transparent, #b5c9a8 70%); }
+  .bot-line.left { background: linear-gradient(to right, transparent, #c8a96e 70%); }
+  .bot-line.right { background: linear-gradient(to left, transparent, #c8a96e 70%); }
 
   .alias-copy {
     display: inline-flex;
@@ -445,29 +446,29 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 15px;
     font-weight: 400;
-    color: #3a5438;
+    color: #1e3050;
     text-decoration: underline;
-    text-decoration-color: #b5c9a8;
+    text-decoration-color: rgba(30,48,80,0.3);
     text-underline-offset: 3px;
     transition: color 0.2s;
   }
-  .alias-copy.copied .alias-text { color: #7a9e7e; text-decoration: none; }
-  .alias-icon { font-size: 11px; color: #b5c9a8; transition: color 0.2s; }
-  .alias-copy.copied .alias-icon { color: #7a9e7e; }
+  .alias-copy.copied .alias-text { color: #1e3050; text-decoration: none; }
+  .alias-icon { font-size: 11px; color: rgba(30,48,80,0.4); transition: color 0.2s; }
+  .alias-copy.copied .alias-icon { color: #1e3050; }
 
   @media (max-width: 480px) {
     .cover-inner { padding: 40px 20px 36px 28px; }
     .inside-content { padding: 36px 20px 36px 28px; }
     .names { font-size: 52px; }
-    .pre-label { color: #8a7a6a; }
-    .tagline { color: #2e4230; }
-    .tagline-sub { color: #7a6a58; }
-    .open-hint { color: #4a7a4e; }
-    .inside-title { color: #8a7a6a; }
-    .info-item-label { color: #7a9e7e; }
-    .info-item-value { color: #2e4230; }
-    .info-item-sub { color: #7a6a58; }
-    .footer-note { color: #8a7a6a; }
+    .pre-label { color: #6a85a8; }
+    .tagline { color: #1e3050; }
+    .tagline-sub { color: #6a85a8; }
+    .open-hint { color: #c8a96e; }
+    .inside-title { color: #6a85a8; }
+    .info-item-label { color: #6a85a8; }
+    .info-item-value { color: #1e3050; }
+    .info-item-sub { color: #6a85a8; }
+    .footer-note { color: #6a85a8; }
     .events { grid-template-columns: 1fr 1fr; gap: 8px; }
     .info-grid {
       grid-template-columns: 1fr;
@@ -578,8 +579,7 @@
         <div class="info-grid">
           <div class="info-item">
             <div class="info-item-label">Bebidas</div>
-            <div class="info-item-value">Traer su bebida</div>
-            <div class="info-item-sub">Gaseosas y hielo en el lugar</div>
+            <div class="info-item-value">Traer bebida</div>
           </div>
           <div class="info-item">
             <div class="info-item-label">Estacionamiento</div>
@@ -603,7 +603,7 @@
 
         <div class="rsvp-box">
           <div class="rsvp-label">Confirmación de asistencia</div>
-          <div class="rsvp-text">Por favor confirmá antes del 10 de Junio</div>
+          <div class="rsvp-text">Por favor confirmá antes del 15 de Junio</div>
           <a class="whatsapp-btn" href="https://wa.me/542494670046?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20al%20casamiento%20de%20Myriam%20y%20Ariel%20%F0%9F%8C%BF" target="_blank">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Confirmar asistencia
@@ -613,13 +613,13 @@
         <div class="botanical">
           <div class="bot-line left"></div>
           <svg width="46" height="22" viewBox="0 0 46 22" fill="none">
-            <path d="M23 11 Q19 4 13 2 Q17 7 23 11Z" fill="#b5c9a8"/>
-            <path d="M23 11 Q27 4 33 2 Q29 7 23 11Z" fill="#b5c9a8"/>
-            <path d="M23 11 Q15 11 9 7 Q15 10 23 11Z" fill="#7a9e7e" opacity="0.7"/>
-            <path d="M23 11 Q31 11 37 7 Q31 10 23 11Z" fill="#7a9e7e" opacity="0.7"/>
-            <path d="M23 11 Q19 18 13 20 Q17 15 23 11Z" fill="#b5c9a8" opacity="0.55"/>
-            <path d="M23 11 Q27 18 33 20 Q29 15 23 11Z" fill="#b5c9a8" opacity="0.55"/>
-            <circle cx="23" cy="11" r="2.5" fill="#c8a96e"/>
+            <path d="M23 11 Q19 4 13 2 Q17 7 23 11Z" fill="#c8a96e"/>
+            <path d="M23 11 Q27 4 33 2 Q29 7 23 11Z" fill="#c8a96e"/>
+            <path d="M23 11 Q15 11 9 7 Q15 10 23 11Z" fill="#a07840" opacity="0.7"/>
+            <path d="M23 11 Q31 11 37 7 Q31 10 23 11Z" fill="#a07840" opacity="0.7"/>
+            <path d="M23 11 Q19 18 13 20 Q17 15 23 11Z" fill="#c8a96e" opacity="0.55"/>
+            <path d="M23 11 Q27 18 33 20 Q29 15 23 11Z" fill="#c8a96e" opacity="0.55"/>
+            <circle cx="23" cy="11" r="2.5" fill="#f0e6d0"/>
           </svg>
           <div class="bot-line right"></div>
         </div>
@@ -635,7 +635,7 @@
   let insideOpen = false;
 
   // ── CONFETTI ──
-  const COLORS = ['#c8a96e','#e8d9a0','#f5f0e8','#7a9e7e','#b5c9a8','#d4af6a','#fff8e7'];
+  const COLORS = ['#1e3050','#2a4570','#c8a96e','#d4bf8a','#f0e6d0','#7a90b0','#a0b8d8','#e8f0f8'];
   const pieces = [];
   let canvas, ctx, animId;
 
